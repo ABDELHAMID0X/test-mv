@@ -21,7 +21,7 @@ const SlidePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&page=6"
+      "https://api.themoviedb.org/3/movie/now_playing?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US"
     )
       .then((res) => res.json())
       .then((data) => {
@@ -50,7 +50,7 @@ const SlidePage = () => {
                     const url = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
                     return(
                         <SwiperSlide key={index}>
-                             <div onClick={() => navigate(`movieInfo/${movie.id}`)} style={{  backgroundImage: `url(${url})`} } key={index}
+                             <div onClick={() => navigate(`movieInfo/${movie.id}/movie`)} style={{  backgroundImage: `url(${url})`} } key={index}
             className='  text-white w-full h-[700px]  bg-cover md:bg-center md:bg-cover relative overflow-hidden'>
             <div className=' absolute top-[20%] md:left-[5%] left-1 md:w-[500px] w-80  h-[300px]      container mx-auto'>
                 <img className='h-full rounded-2xl  mx-9 shadow-xl  shadow-black' src={url} alt="" />

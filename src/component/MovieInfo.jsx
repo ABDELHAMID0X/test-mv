@@ -5,11 +5,12 @@ import Star from '../assets/star.png'
 
 const MovieInfo = () => {
     const { id } = useParams();
+    const {media_type} = useParams();
     const [movies, setMovies] = useState([]);
-    const url = `https://image.tmdb.org/t/p/original${movies.backdrop_path}`
+    const url = `https://image.tmdb.org/t/p/original`
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&page=1`
+      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -18,22 +19,33 @@ const MovieInfo = () => {
       });
   });
 
+  fetch(`https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US`)
+  .then((res)=> res.json())
+  .then((dt)=>{
+    setCast(dt.cast)
+  })
+
+  const [cast , setCast] = useState([]);
+
   return (
     <>
     
-        <div
+        <div key={movies.id}
         style={{
-          backgroundImage: `url(${url})`,
+          backgroundImage: `url(${url+movies.backdrop_path})`,
         }}
         className="  text-white w-full md:h-[100vh] h-[1200px]  bg-cover bg-center  relative overflow-hidden"
       >
-        <div className=" absolute md:top-[30%] top-[10%]  md:left-[5%] left-1 md:w-[1000px] w-96  h-[300px] items-center     flex md:flex-nowrap flex-wrap justify-center  container mx-auto">
-          <img className="shadow-2xl h-96 md:w-80 w-80 rounded-xl md:mx-10 mx-0" src={url } alt="" />
+        <div className='absolute top-0 left-0 w-full bg-black/80 h-full'>
+
+        </div>
+        <div className=" absolute md:top-[30%]  top-[10%]  md:left-[15%] left-1 md:w-[1000px]   w-96  h-[300px] items-center     flex md:flex-nowrap flex-wrap justify-center  container mx-auto">
+          <img className="shadow-2xl md:h-[360px] h-[400px]   object-cover bg-right-bottom  md:w-[300px]  w-80  rounded-sm  md:mx-10 mx-0" src={url+movies.poster_path } alt="" />
             <div className="">
-            <h1 style={{textShadow: '1px 1px 2px black, 0 0 1em black, 0 0 0.2em black'}}  className="mx-2 my-3 text-4xl">{movies.original_title}</h1>
+            <h1 style={{textShadow: '1px 1px 2px black, 0 0 1em black, 0 0 0.2em black'}}  className="mx-2 my-3 text-4xl">{ movies.original_title || movies.name}</h1>
             <div className="flex mb-2 items-center  ">
               {
-                //  movies.genres.name && movies.genres.name.map(genre =>(
+                //  movies.genres && movies.genres.name && movies.genres.name.map((genre) =>(
                 //   <button
                 //   key={genre}
                 //   type="button"
@@ -50,11 +62,11 @@ const MovieInfo = () => {
               <img src={Star} className="w-6 " alt="" />
               <p className="mr-3 ml-1 ">
                 {}
-                <span className="text-gray-500">{}/10</span>
+                <span className="text-gray-100">{movies.vote_average}/10</span>
               </p>
             </div>
             <p className="mr-3">
-              126<span className="text-gray-500">min</span>
+              {movies.runtime}<span className="text-gray-300">min</span>
             </p>
             <span className="border rounded-xl px-2">{}</span>
           </div>
@@ -72,6 +84,36 @@ const MovieInfo = () => {
             </div>
         </div>
       </div>
+
+              
+      <div className="container mx-auto my-10 ">
+              <h1 className="text-[#D32444] text-[30px]" >Top casT</h1>
+              <div className="flex flex-wrap justify-center">
+              {
+                cast.slice(0,12).map((ca)=>{
+                  return(
+                    <div
+                    key={ca.id}
+                    className="w-96 my-2 p-2 flex  items-center">
+                    <img 
+                    className="w-20 h-20 rounded-full mx-10"
+                    src={url+ca.profile_path} alt="" />
+                    <div className="text-[#99988b]">
+                      <h1 className="text-gray-100">{ca.name}</h1>
+                      <p>{ca.character}</p>
+                      <div className="">
+                      <p className=""></p>
+                      
+                      </div>
+                    </div>
+                  </div>
+                  )
+                })
+              }
+              </div>
+              </div>
+              
+      
     </>
     
   )

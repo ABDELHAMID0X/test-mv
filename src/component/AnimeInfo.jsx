@@ -47,7 +47,7 @@ const AnimeInfo = () => {
                 // ))
               }
             </div>
-          <p style={{textShadow: '1px 1px 2px black, 0 0 1em black, 0 0 0.2em black'}} className="text-gray-100 drop-shadow-2xl">{anime.synopsis}</p> 
+          <p style={{textShadow: '1px 1px 2px black, 0 0 1em black, 0 0 0.2em black'}} className="text-gray-100 text-sm drop-shadow-2xl">{anime.synopsis}</p> 
           <div className="flex mt-2 md:mb-4 mb-1 items-center  px-1">
             <div className="flex  items-center ">
               <img src={Star} className="w-6 " alt="" />

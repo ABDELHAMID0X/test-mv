@@ -20,7 +20,7 @@ function HomeMovies() {
   const navigate = useNavigate();
   useEffect(() => {
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&page=1"
     )
       .then((res) => res.json())
       .then((data) => {
@@ -32,9 +32,9 @@ function HomeMovies() {
   const [loading , setLoading] = useState(false)
   return (
     <>
-      <div className="my-10  container mx-auto">
+      <div className="my-10  container mx-auto justify">
         <h1 className="text-white text-md  mb-8">
-          Movies{" "}
+        Top Rated Movies
           <span
             className="text-md text-[#D32444] mx-2"
             onClick={() => navigate(`AllMv`)}
@@ -50,17 +50,22 @@ function HomeMovies() {
             clickable: true,
           }}
           breakpoints={{
-            640: {
+            300: {
               slidesPerView: 2,
-              spaceBetween: 20,
+              spaceBetween: 5,
             },
-            768: {
-              slidesPerView: 4,
+            650: {
+              slidesPerView: 3,
               spaceBetween: 40,
             },
-            1024: {
+            
+            1040: {
               slidesPerView: 5,
-              spaceBetween: 50,
+              spaceBetween: 10,
+            },
+            1300: {
+              slidesPerView: 6,
+              spaceBetween: 10,
             },
           }}
           modules={[Pagination]}
@@ -73,25 +78,24 @@ function HomeMovies() {
             return (
               <SwiperSlide key={index}>
                 <div
-                  onClick={() => navigate(`movieInfo/${movie.id}`)}
+                  onClick={() => navigate(`movieInfo/${movie.id}/movie`)}
                   key={index}
                   className="w-full mb-14 flex text-white items-center justify-center  "
                 >
-                  <div className="w-[250px] ">
-                    <div className="h-[280px] w-full  ">
+                  <div className="w-[180px] ">
+                    <div className="h-[250px] w-full  ">
                       <img
                         src={url}
-                        className="w-full h-full rounded-xl"
+                        className="w-full rounded-xl h-full bg-center bg-cover object-cover"
                         alt="movie"
                       />
                     </div>
-                    <h1 className="m-2">{movie.original_title}</h1>
+                    <h1 className="m-2 h-10">{movie.original_title}</h1>
                     <div className="flex items-center justify-between px-1">
                       <div className="flex items-center ">
                         <img src={Star} className="w-6 " alt="" />
                         <p className="mx-1 ">{movie.vote_average}</p>
                       </div>
-                      <p>126min</p>
                       <span className="border rounded-xl text-[10px] p-1 ">
                         {movie.release_date}
                       </span>

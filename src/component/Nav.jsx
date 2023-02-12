@@ -10,36 +10,37 @@ const Nav = () => {
   const navigate = useNavigate();
 
   // State to keep track of the search term entered in the search bar
-  const [search, setSearch] = useState("");
+  
 
   // State to keep track of the TV shows that match the search term
   const [tv, setTv] = useState([]);
 
   const [value, setValue] = useState("");
-
+  const [icml , seticml] = useState('');
   // State to keep track of the visibility of the dropdown menu
   const [hide, setHide] = useState(false);
   // Fetch data from the TV Maze API using the search term
-  fetch(`https://api.tvmaze.com/search/shows?q=${search}`)
+  fetch(`
+  https://api.themoviedb.org/3/search/multi?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&query=${icml}&page=1&include_adult=false`)
     .then((response) => {
       // Convert the response to JSON
       return response.json();
     })
     .then((data) => {
       // Update the state with the TV shows that match the search term
-      setTv(data);
+      setTv(data.results);
+      // console.log(data)
     })
     .catch((err) => console.error(err));
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && value !== "") {
-      setSearch(value);
+      seticml(value)
     }
-    if(value ===""){setSearch(value)}
+    if(value ===""){seticml(value)}
   };
-
   const onChange = (event) => setValue(event.target.value);
-
+  const url ='https://image.tmdb.org/t/p/original';
   return (
     <>
       <div className="w-full  backdrop-blur-sm bg-black/30 fixed z-30">
@@ -66,41 +67,35 @@ const Nav = () => {
           >
             <div className="absolute max-h-80 overflow-y-scroll  backdrop-blur-sm bg-black/90 text-white top-20   md:w-96 w-full flex-wrap items-center justify-center left-0   rounded-xl flex  ">
               {tv
-                .filter((tv) => {
-                  // Filter the TV shows based on the search term
-                  return tv.show.name
-                    .toLowerCase()
-                    .includes(search.toLowerCase());
-                })
-                .map((t, index) => {
+               .map((t, index) => {
                   return (
                     <div
                       key={index}
                       onClick={() =>{
-                        navigate(`TvF/${t.show.id}`)
-                        setSearch('')
+                        navigate(`movieInfo/${t.id}/${t.media_type}`)
+                        seticml('')
                       }
                          }
                       className="w-80 border rounded-2xl px-2 flex items-center m-4 py-4"
                     >
                       <div className="h-[80px] w-[80px]  ">
                         <img
-                          src={t.show.image && t.show.image.original}
+                          src={url +t.backdrop_path}
                           className="w-full h-full rounded-xl"
                           alt="movie"
                         />
                       </div>
                       <div className=" w-64">
-                        <h1 className="m-2">{t.show.name}</h1>
+                        <h1 className="m-2">{ t.original_title|| t.name}</h1>
                         <div className="flex items-center justify-between px-1">
                           <div className="flex items-center ">
                             <img src={Star} className="w-6 " alt="" />
                             <p className="mx-1 ">
-                              {t.show.rating ? t.show.rating.average : ""}/10
+                              {t.vote_average}/10
                             </p>
                           </div>
-                          <p>{t.show.id}</p>
-                          <span className="border rounded-xl px-2">PG13</span>
+                          <p>{}</p>
+                          <span className="border rounded-xl px-2">{t.media_type}</span>
                         </div>
                       </div>
                     </div>

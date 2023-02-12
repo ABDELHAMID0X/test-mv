@@ -52,18 +52,23 @@ const HomeAnime = () => {
           pagination={{
             clickable: true,
           }}
-          breakpoints={{
+          breakpoints={{  
             640: {
               slidesPerView: 2,
               spaceBetween: 20,
             },
             768: {
-              slidesPerView: 4,
+              slidesPerView: 3,
               spaceBetween: 40,
             },
-            1024: {
+            
+            1040: {
+              slidesPerView: 4,
+              spaceBetween: 10,
+            },
+            1260: {
               slidesPerView: 5,
-              spaceBetween: 50,
+              spaceBetween: 10,
             },
           }}
           modules={[Pagination]}
@@ -74,7 +79,7 @@ const HomeAnime = () => {
                 return(
                   <SwiperSlide>
                   <div
-
+                  key={an.mal_id}
                   className="w-full  mb-14 flex text-white items-center justify-center  "
                   >
                   <div
