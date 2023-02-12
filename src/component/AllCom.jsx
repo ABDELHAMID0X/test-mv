@@ -4,13 +4,13 @@ import Star from '../assets/star.png'
 import { Link } from 'react-router-dom'
 import { ThreeDots } from  'react-loader-spinner'
 
-const AllMovies = () => {
+const AllCom = () => {
 
       
   const [allMovies , setAll] = useState([])
   
   useEffect(()=>{
-      fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&page=${page}`)
+      fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&page=${page}`)
       .then((res)=> res.json())
       .then((data2=>{
         setAll(data2.results)
@@ -39,7 +39,7 @@ const AllMovies = () => {
                 allMovies.map((mv , index)=>{
                   const url = `https://image.tmdb.org/t/p/original${mv.poster_path}`
                   return(
-                    <Link to={`/movieInfo/${mv.id}/tv`} >
+                    <Link to={`/movieInfo/${mv.id}/movie`} >
                          <div
                     
                     key={index} className='md:w-60 w-40 m-4 '>
@@ -54,14 +54,14 @@ const AllMovies = () => {
                               <p>No Image Available</p>
                           )}
                         </div>
-                        <h1 className='m-2 h-10'>{mv.name || mv.originale_title}</h1>
+                        <h1 className='m-2 h-10'>{ mv.original_title}</h1>
                         <div className='flex items-center justify-between px-1'>
                             <div className='flex items-center '>
                                 <img src={Star} className="w-6 " alt="" />
                                 <p className='mx-1 '>{mv.vote_average ? mv.vote_average : "6.6" }</p>
                             </div>
                             
-                            <span className='border rounded-xl text-[12px] px-2'>{mv.first_air_date}</span>
+                            <span className='border rounded-xl text-[12px] px-2'>{mv.release_date}</span>
                         </div>
                     </div> 
                     
@@ -107,4 +107,4 @@ const AllMovies = () => {
   )
 }
 
-export default AllMovies
+export default AllCom

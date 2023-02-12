@@ -66,7 +66,7 @@ const Nav = () => {
             }
           >
             <div className="absolute max-h-80 overflow-y-scroll  backdrop-blur-sm bg-black/90 text-white top-20   md:w-96 w-full flex-wrap items-center justify-center left-0   rounded-xl flex  ">
-              {tv
+              {tv.filter(tg => tg.media_type !== "person")
                .map((t, index) => {
                   return (
                     <div
@@ -78,9 +78,9 @@ const Nav = () => {
                          }
                       className="w-80 border rounded-2xl px-2 flex items-center m-4 py-4"
                     >
-                      <div className="h-[80px] w-[80px]  ">
+                      <div className="h-[100px] w-[90px]  ">
                         <img
-                          src={url +t.backdrop_path}
+                          src={url +t.poster_path || url +t.backdrop_path}
                           className="w-full h-full rounded-xl"
                           alt="movie"
                         />

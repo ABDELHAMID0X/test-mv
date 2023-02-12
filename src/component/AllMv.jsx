@@ -1,6 +1,6 @@
 import React , {useEffect , useState} from 'react'
 import Star from '../assets/star.png'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 import { ThreeDots } from  'react-loader-spinner'
@@ -8,7 +8,7 @@ import { ThreeDots } from  'react-loader-spinner'
 const AllMv = () => {
 
          
-    const navigate = useNavigate();
+    
     useEffect(() => {
       fetch(
         `https://api.themoviedb.org/3/movie/now_playing?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&page=${page}`
@@ -21,8 +21,7 @@ const AllMv = () => {
     },);
     const [movies, setMovies] = useState([]);
     const [loading , setLoading] = useState(false)
-    const [page , setPage] = useState(1)
-    const pg = [1,2,3,4,5,6,7,8,9,10]    
+    const [page , setPage] = useState(1)   
   
   return (
     <>
@@ -39,19 +38,17 @@ const AllMv = () => {
               {
                 loading ?
                 movies.length !== 0 && movies.map((movie , index)=>{
-                    const url = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+                    const url = `https://image.tmdb.org/t/p/original${movie.poster_path}`
                   return(
-                    <div
-                  onClick={() => {
-                    navigate(`movieInfo/${movie.id}/movie`)
-                  }}
+                    <Link to={`/movieInfo/${movie.id}/movie`} >
+                      <div
                   key={index}
                   className=" mx-4 mb-14 flex text-white  justify-center  "
                 >
-                  <div className="w-64  ">
-                    <div className=' w-ful mb-2'>
+                  <div className="md:w-60   w-40 ">
+                    <div className=' w-full mb-2'>
                         <img 
-                        className='h-80 rounded-sm'
+                        className='md:h-80 h-56 w-full rounded-md'
                         src={url} alt="" />
                     </div>
                     <h1 className="h-10 mb-2">{movie.original_title}</h1>
@@ -60,13 +57,13 @@ const AllMv = () => {
                         <img src={Star} className="w-6 " alt="" />
                         <p className="mx-1 ">{movie.vote_average ? movie.vote_average : "6.6" }</p>
                       </div>
-                      <p>126min</p>
                       <span className="border rounded-xl text-[10px] p-1 ">
                         {movie.release_date}
                       </span>
                     </div>
                   </div>
                 </div>
+                    </Link>
                   )
                 })
                 : <ThreeDots 
@@ -84,17 +81,24 @@ const AllMv = () => {
               <div className=' my-10  backdrop-blur-sm bg-black/30 px-2 p-2 rounded-2xl text-white w-max flex mx-auto' >
             
               <div className=''>
-                {
-                  pg.map((p)=>{
-                    return(
-                      <input key={p} type="submit" value={p} onClick={()=>{
-                        setPage(p)
+                    {
+                      page >1 ? <input   type="submit" value="back" onClick={()=>{
+                        setPage(page-1)
+                    }} className='active  mx-1 bg-blue-700 rounded-full px-2'/>
+
+                     :  <input  disabled type="submit" value="back"
+                     className=' mx-1 bg-blue-700 rounded-full px-2'/>
+}  
+
+                      <input  type="submit" value={page} onClick={()=>{
+                        setPage(page+1)
                       }} className='active mx-1 bg-blue-700 rounded-full px-2'/>
-      
-                    )
-                  })
-                }
-                              </div>
+                      <input  type="submit" value="next" onClick={()=>{
+                        setPage(page+1)
+                      }} className='active mx-1 bg-blue-700 rounded-full px-2'/>
+        
+                
+              </div>
            </div>
       
     </>

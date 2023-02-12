@@ -64,7 +64,7 @@ function HomeMovies() {
               spaceBetween: 10,
             },
             1300: {
-              slidesPerView: 6,
+              slidesPerView: 7,
               spaceBetween: 10,
             },
           }}
@@ -90,7 +90,7 @@ function HomeMovies() {
                         alt="movie"
                       />
                     </div>
-                    <h1 className="m-2 h-10">{movie.original_title}</h1>
+                    <h1 className="m-2 h-9">{movie.original_title}</h1>
                     <div className="flex items-center justify-between px-1">
                       <div className="flex items-center ">
                         <img src={Star} className="w-6 " alt="" />

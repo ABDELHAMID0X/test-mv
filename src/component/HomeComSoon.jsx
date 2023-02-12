@@ -22,7 +22,7 @@ function HomeComSoon() {
   const navigate = useNavigate();
   useEffect(() => {
     fetch(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&page=3"
+      "https://api.themoviedb.org/3/movie/upcoming?api_key=08399bf740a4d93d9e75e8a3a6917e88&language=en-US&page=1"
     )
       .then((res) => res.json())
       .then((data) => {
@@ -35,7 +35,7 @@ function HomeComSoon() {
       <div className="my-10  container mx-auto">
         <h1 className="text-white text-md  mb-8">
         Upcoming Movies
-          <span className="text-md text-[#D32444] mx-2" onClick={() => navigate(`AllMovies`)} style={{cursor :' pointer'}} >See More</span>
+          <span className="text-md text-[#D32444] mx-2" onClick={() => navigate(`AllCom`)} style={{cursor :' pointer'}} >See More</span>
         </h1>
 
         <Swiper

@@ -47,20 +47,19 @@ const SlidePage = () => {
       >
          {
                 movies.map((movie , index)=>{
-                    const url = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+                    const url = `https://image.tmdb.org/t/p/original`
                     return(
                         <SwiperSlide key={index}>
-                             <div onClick={() => navigate(`movieInfo/${movie.id}/movie`)} style={{  backgroundImage: `url(${url})`} } key={index}
+                             <div onClick={() => navigate(`movieInfo/${movie.id}/movie`)} style={{  backgroundImage: `url(${url+movie.backdrop_path})`} } key={index}
             className='  text-white w-full h-[700px]  bg-cover md:bg-center md:bg-cover relative overflow-hidden'>
             <div className=' absolute top-[20%] md:left-[5%] left-1 md:w-[500px] w-80  h-[300px]      container mx-auto'>
-                <img className='h-full rounded-2xl  mx-9 shadow-xl  shadow-black' src={url} alt="" />
-                <h1 className='mx-2 my-3 text-4xl'>{movie.original_title}</h1>
+                <img className='h-80 rounded-2xl  mx-9 shadow-xl w-60 shadow-black' src={url+movie.poster_path} alt="" />
+                <h1 style={{textShadow: '1px 1px 2px black, 0 0 1em black, 0 0 0.2em black'}} className='mx-2 my-3 text-4xl'>{movie.original_title}</h1>
                     <div className='flex mb-5 items-center  px-1'>
                         <div className='flex items-center '>
                             <img src={Star} className="w-6 " alt="" />
                             <p className='mr-3 ml-1 '>{movie.vote_average}<span className='text-gray-500'>/10</span></p>
                         </div>
-                        <p className='mr-3'>126<span className='text-gray-500'>min</span></p>
                         <span className='border rounded-xl px-2'>{movie.release_date}</span>
                     </div>
                     <div>

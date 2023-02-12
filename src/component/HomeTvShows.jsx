@@ -55,7 +55,7 @@ function HomeTvShows() {
               spaceBetween: 10,
             },
             1300: {
-              slidesPerView: 6,
+              slidesPerView: 7,
               spaceBetween: 10,
             },
           }}
@@ -65,7 +65,7 @@ function HomeTvShows() {
             {
             tvShows ? 
             tvShows.map((tvShow, index) => {
-              const url = `https://image.tmdb.org/t/p/original${tvShow.backdrop_path}`;
+              const url = `https://image.tmdb.org/t/p/original${tvShow.poster_path}`;
               return (
                 <SwiperSlide key={index}>
                    <div 
@@ -73,26 +73,25 @@ function HomeTvShows() {
                   key={index}
                   className="w-full mb-14 flex text-white items-center justify-center  "
                 >
-                  <div className="w-[230px] ">
-                    <div className="h-[280px] w-full  ">
+                  <div className="w-[180px] ">
+                    <div className="h-[250px] w-full  ">
                         {url &&
                         url ? (
                       <img
                         src={url}
-                        className="w-full h-full bg-center bg-cover object-cover"
+                        className="w-full h-full rounded-md bg-center bg-cover object-cover"
                         alt="movie"
                       />
                        ) : (
                           <p>No Image Available</p>
                         )}
                     </div>
-                    <h1 className="m-2 h-10">{}</h1>
+                    <h1 className="m-2 h-10">{tvShow.name}</h1>
                     <div className="flex items-center justify-between px-1">
                       <div className="flex items-center ">
                         <img src={Star} className="w-6 " alt="" />
-                        <p className="mx-1 ">8.6/10</p>
+                        <p className="mx-1 ">{tvShow.vote_average}</p>
                       </div>
-                      <p>126min</p>
                         <span className="border rounded-xl px-2">PG13</span>
                     </div>
                   </div>
