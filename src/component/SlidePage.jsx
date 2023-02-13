@@ -53,7 +53,7 @@ const SlidePage = () => {
                              <div onClick={() => navigate(`movieInfo/${movie.id}/movie`)} style={{  backgroundImage: `url(${url+movie.backdrop_path})`} } key={index}
             className='  text-white w-full h-[700px]  bg-cover md:bg-center md:bg-cover relative overflow-hidden'>
             <div className=' absolute top-[20%] md:left-[5%] left-1 md:w-[500px] w-80  h-[300px]      container mx-auto'>
-                <img className='h-80 rounded-2xl  mx-9 shadow-xl w-60 shadow-black' src={url+movie.poster_path} alt="" />
+                <img className='h-80 rounded-2xl  md:mx-9 mx-16 shadow-xl w-60 shadow-black' src={url+movie.poster_path} alt="" />
                 <h1 style={{textShadow: '1px 1px 2px black, 0 0 1em black, 0 0 0.2em black'}} className='mx-2 my-3 text-4xl'>{movie.original_title}</h1>
                     <div className='flex mb-5 items-center  px-1'>
                         <div className='flex items-center '>

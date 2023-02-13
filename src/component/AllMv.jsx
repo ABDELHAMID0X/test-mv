@@ -1,7 +1,8 @@
 import React , {useEffect , useState} from 'react'
 import Star from '../assets/star.png'
 import { Link } from 'react-router-dom'
-
+import left from '../assets/left-arrow.png'
+import right from '../assets/right-arrow.png'
 
 import { ThreeDots } from  'react-loader-spinner'
 
@@ -45,13 +46,13 @@ const AllMv = () => {
                   key={index}
                   className=" mx-4 mb-14 flex text-white  justify-center  "
                 >
-                  <div className="md:w-60   w-40 ">
+                  <div className="md:w-60   w-36 ">
                     <div className=' w-full mb-2'>
                         <img 
-                        className='md:h-80 h-56 w-full rounded-md'
+                        className='md:h-80 h-52 w-full rounded-md'
                         src={url} alt="" />
                     </div>
-                    <h1 className="h-10 mb-2">{movie.original_title}</h1>
+                    <h1 className="  h-12 md:text-md text-[13px] mb-2">{movie.original_title}</h1>
                     <div className="flex  items-center justify-between px-1">
                       <div className="flex items-center ">
                         <img src={Star} className="w-6 " alt="" />
@@ -80,22 +81,22 @@ const AllMv = () => {
               </div>   
               <div className=' my-10  backdrop-blur-sm bg-black/30 px-2 p-2 rounded-2xl text-white w-max flex mx-auto' >
             
-              <div className=''>
+              <div className='flex items-center'>
                     {
-                      page >1 ? <input   type="submit" value="back" onClick={()=>{
+                      page >1 ? <button     onClick={()=>{
                         setPage(page-1)
-                    }} className='active  mx-1 bg-blue-700 rounded-full px-2'/>
+                    }} className='active  mx-1 bg-blue-700 rounded-full '><img className='w-8 p-2' src={left} alt="" /></button>
 
-                     :  <input  disabled type="submit" value="back"
-                     className=' mx-1 bg-blue-700 rounded-full px-2'/>
+                     :  <button  disabled type="submit" 
+                     className=' mx-1 bg-blue-700 rounded-full '><img className='w-8 p-2' src={left} alt="" /></button>
 }  
 
-                      <input  type="submit" value={page} onClick={()=>{
+                      <button  type="submit"  onClick={()=>{
+                        
+                      }} className='active mx-2  bg-blue-700 rounded-md py-1 px-2'>{page}</button>
+                      <button    onClick={()=>{
                         setPage(page+1)
-                      }} className='active mx-1 bg-blue-700 rounded-full px-2'/>
-                      <input  type="submit" value="next" onClick={()=>{
-                        setPage(page+1)
-                      }} className='active mx-1 bg-blue-700 rounded-full px-2'/>
+                      }} className='active mx-1  bg-blue-700 rounded-full '> <img className='w-8 p-2' src={right} alt="" /> </button>
         
                 
               </div>

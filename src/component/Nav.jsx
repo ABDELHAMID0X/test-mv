@@ -43,8 +43,8 @@ const Nav = () => {
   const url ='https://image.tmdb.org/t/p/original';
   return (
     <>
-      <div className="w-full  backdrop-blur-sm bg-black/30 fixed z-30">
-        <div className="container    mx-auto p-5 md:flex flex flex-wrap items-center justify-between  ">
+      <div className="w-full h-max backdrop-blur-sm bg-black/30 fixed z-30">
+        <div className="container    mx-auto px-5 md:py-5 py-2 md:flex flex flex-wrap items-center justify-between  ">
           <NavLink to="/">
             <p className="text-[#D32444] w-32">Logo</p>
           </NavLink>
@@ -52,11 +52,11 @@ const Nav = () => {
             onClick={() => {
               // Toggle the visibility of the dropdown menu
               setHide(!hide);
-              console.log(hide);
+              
             }}
-            className="md:hidden block  w-10"
+            className="md:hidden block  w-8"
           >
-            <img src={list} alt="" />
+            <img className="w-full" src={list} alt="" />
           </div>
           <div
             className={
