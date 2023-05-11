@@ -279,7 +279,7 @@ const MovieInfo = () => {
                 Similar Movies
               </h2>
             </div>
-            <div className="w-[80%] mx-auto   flex-wrap flex text-white items-center justify-center  ">
+            <div className="md:w-[80%] w-full mx-auto   flex-wrap flex text-white items-center justify-center  ">
               <Swiper
                 slidesPerView={2}
                 spaceBetween={10}
