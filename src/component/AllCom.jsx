@@ -28,8 +28,8 @@ const AllCom = () => {
     <>
          <div className='pt-32 mb-5  '>
          {/* <InfinitySpin width='200'color="#4fa94d"/> */}
-           <div className='flex items-center mb-5 justify-between flex-wrap container mx-auto'>
-           <h1 className='text-white text-md w-32   '>All Tv Show </h1>
+           <div className='w-[85%] mx-auto mb-5'>
+           <h1 className='text-[#D32444] font-semibold font-semibold md:text-md text-xl ml-0 uppercase  mb-8'>All  upcoming </h1>
          
           
     
